@@ -1,0 +1,153 @@
+:root {
+	--bg-color: #121212;
+}
+
+body {
+	background-color: var(--bg-color);
+	font-family: "Lato", sans-serif;
+	color: #fff;
+}
+.padding {
+	padding: 55px 20px 90px;
+}
+.padding-x {
+	padding: 0px 20px 90px;
+}
+.text-right {
+	text-align: right;
+}
+.text-center {
+	text-align: center;
+}
+.transparent {
+	background: transparent !important;
+}
+.ml-auto {
+	margin-left: auto;
+}
+.mt-4 {
+	margin-top: 16px;
+}
+.mt-5 {
+	margin-top: 20px;
+}
+.mt-6 {
+	margin-top: 24px;
+}
+.mt-10 {
+	margin-top: 40px;
+}
+.mb-5 {
+	margin-bottom: 20px;
+}
+
+.title {
+	font-size: 21px;
+	font-weight: 700;
+}
+.back-btn {
+	width: 32px;
+	height: 32px;
+	backdrop-filter: blur(0.5px);
+	background-color: rgba(38, 38, 38, 0.35);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	left: 16px;
+	top: 52px;
+	z-index: 3;
+}
+.back-btn img {
+	position: relative;
+	right: 1px;
+}
+
+.footer-tab {
+	background: #282828;
+	height: 70px;
+	position: fixed;
+	bottom: 0;
+	padding: 10px 20px;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.footer-tab__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+}
+.footer-tab__title {
+	font-size: 13px;
+}
+
+.play-button--green {
+	width: 56px;
+	height: 56px;
+	background-color: #57b560;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.play-button__shuffle {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	background-color: white;
+	bottom: 0px;
+	right: -5px;
+}
+
+.music {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
+.music__info {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+.music__actions {
+	display: flex;
+	align-items: center;
+	gap: 32px;
+}
+.music__plays {
+	display: flex;
+	gap: 5px;
+	margin-top: 6px;
+	align-items: center;
+}
+.music__plays img {
+	width: 15px;
+	position: relative;
+	bottom: 0.5px;
+}
+.music__number {
+	font-size: 13px;
+}
+.music__image {
+	width: 52px;
+	height: 52px;
+}
+.music__title h6 {
+	font-size: 16px;
+	font-weight: 400;
+}
+.music__title p {
+	font-size: 12px;
+	color: #b8b8b8;
+}

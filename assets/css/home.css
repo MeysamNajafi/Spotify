@@ -1,0 +1,68 @@
+body {
+	background-image: url("/assets/images/fade.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.header__icon {
+	margin-left: auto;
+	color: white;
+	cursor: pointer;
+}
+
+.recent {
+	margin-top: 15px;
+	align-items: center;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	grid-column-gap: 12px;
+	grid-row-gap: 12px;
+}
+
+.recent__card {
+	flex: 1;
+	border-radius: 4px;
+	background-color: #262626;
+	height: 56px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	backdrop-filter: blur(15px);
+	transition: all 0.3s;
+	cursor: pointer;
+}
+.recent__card:hover {
+	scale: 1.03;
+	backdrop-filter: blur(30px);
+}
+.recent__image {
+	width: 56px;
+	object-fit: cover;
+}
+
+.recent__title {
+	font-size: 13px;
+}
+
+.recently {
+	margin-top: 33px;
+}
+.recently__main {
+	display: flex;
+	gap: 16px;
+	overflow: auto;
+	flex-wrap: nowrap;
+	margin-top: 22px;
+}
+.recently__main::-webkit-scrollbar {
+	display: none;
+}
+
+.music-big__image {
+	width: 124px;
+	height: 124px;
+}
+.music-big__title {
+	font-size: 13px;
+}
