@@ -1,5 +1,5 @@
 body {
-	background-image: url("/assets/images/fade.png");
+	background-image: url("/images/fade.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 }
@@ -33,7 +33,7 @@ body {
 	cursor: pointer;
 }
 .recent__card:hover {
-	scale: 1.03;
+	scale: 1.01;
 	backdrop-filter: blur(30px);
 }
 .recent__image {
@@ -43,6 +43,7 @@ body {
 
 .recent__title {
 	font-size: 13px;
+	font-weight: bold;
 }
 
 .recently {
