@@ -1,0 +1,32 @@
+[
+	{
+		"name": "Persian Rap",
+		"image": "/db/images/rapfa.jpeg",
+		"songs": [1, 2, 6, 7, 8, 9, 18, 19, 20]
+	},
+	{
+		"name": "Hip Hop",
+		"image": "/db/images/hiphop.jpeg",
+		"songs": [3, 4, 5, 10, 11, 12, 13, 14, 15, 16, 17]
+	},
+	{
+		"name": "Love",
+		"image": "/db/images/love.jpeg",
+		"songs": [3, 4, 5, 12, 13, 17]
+	},
+	{
+		"name": "New Hits",
+		"image": "/db/images/hits.jpeg",
+		"songs": [6, 8, 16, 17, 20]
+	},
+	{
+		"name": "Pop",
+		"image": "/db/images/pop.jpeg",
+		"songs": [12, 13, 17]
+	},
+	{
+		"name": "Nostalgia",
+		"image": "/db/images/nostalgia.jpeg",
+		"songs": [10, 11, 13, 15]
+	}
+]

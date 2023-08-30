@@ -1,0 +1,47 @@
+[
+	{
+		"id": 1,
+		"name": "The weekend",
+		"image": "/db/images/weekend.jpeg"
+	},
+	{
+		"id": 2,
+		"name": "Eminem",
+		"image": "/db/images/eminem.jpeg"
+	},
+	{
+		"id": 3,
+		"name": "NF",
+		"image": "/db/images/nf.jpeg"
+	},
+	{
+		"id": 4,
+		"name": "Ho3ein",
+		"image": "/db/images/ho3ein.jpeg"
+	},
+	{
+		"id": 5,
+		"name": "Black Atlass",
+		"image": "/db/images/black-atlass.jpeg"
+	},
+	{
+		"id": 6,
+		"name": "Mehrad Hidden",
+		"image": "/db/images/hidden.jpeg"
+	},
+	{
+		"id": 7,
+		"name": "Soharb Mj",
+		"image": "/db/images/mj.jpeg"
+	},
+	{
+		"id": 8,
+		"name": "Travis Scott",
+		"image": "/db/images/travis.jpeg"
+	},
+	{
+		"id": 9,
+		"name": "Drake",
+		"image": "/db/images/drake.jpeg"
+	}
+]

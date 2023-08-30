@@ -1,0 +1,142 @@
+[
+	{
+		"id": 1,
+		"name": "Ye roozi",
+		"artistId": 7,
+		"music": "/db/songs/ye-roozi.mp3",
+		"plays": 989018
+	},
+	{
+		"id": 2,
+		"name": "Gangesh Balas",
+		"artistId": 7,
+		"music": "/db/songs/gangesh-balas.mp3",
+		"plays": 1029018
+	},
+	{
+		"id": 3,
+		"name": "Intoxicated - Acoustic",
+		"artistId": 5,
+		"music": "/db/songs/intoxicated.mp3",
+		"plays": 102670901
+	},
+	{
+		"id": 4,
+		"name": "Beautiful Stranger",
+		"artistId": 5,
+		"music": "/db/songs/beautiful-stranger.mp3",
+		"plays": 590809178
+	},
+	{
+		"id": 5,
+		"name": "Losing Love",
+		"artistId": 5,
+		"music": "/db/songs/losing-love.mp3",
+		"plays": 98019218
+	},
+	{
+		"id": 6,
+		"name": "Kabk",
+		"artistId": 4,
+		"music": "/db/songs/kabk.mp3",
+		"plays": 278001
+	},
+	{
+		"id": 7,
+		"name": "Didgah",
+		"artistId": 4,
+		"music": "/db/songs/kabk.mp3",
+		"plays": 1500190
+	},
+	{
+		"id": 8,
+		"name": "Moji",
+		"artistId": 6,
+		"music": "/db/songs/moji.mp3",
+		"plays": 478901
+	},
+	{
+		"id": 9,
+		"name": "Oof",
+		"artistId": 6,
+		"music": "/db/songs/oof.mp3",
+		"plays": 2809222
+	},
+	{
+		"id": 10,
+		"name": "Without Me",
+		"artistId": 2,
+		"music": "/db/songs/without-me.mp3",
+		"plays": 1400900180
+	},
+	{
+		"id": 11,
+		"name": "Mockingbird",
+		"artistId": 2,
+		"music": "/db/songs/mockingbird.mp3",
+		"plays": 2224910185
+	},
+	{
+		"id": 12,
+		"name": "Die For You",
+		"artistId": 1,
+		"music": "/db/songs/die-for-you.mp3",
+		"plays": 1254110185
+	},
+	{
+		"id": 13,
+		"name": "Save Your Tears",
+		"artistId": 1,
+		"music": "/db/songs/save-your-tears.mp3",
+		"plays": 1452567085
+	},
+	{
+		"id": 14,
+		"name": "Let You Down",
+		"artistId": 3,
+		"music": "/db/songs/let-you-down.mp3",
+		"plays": 224910485
+	},
+	{
+		"id": 15,
+		"name": "The Search",
+		"artistId": 3,
+		"music": "/db/songs/the-search.mp3",
+		"plays": 1484910185
+	},
+	{
+		"id": 16,
+		"name": "Melt Down",
+		"artistId": 8,
+		"music": "/db/songs/meltdown.mp3",
+		"plays": 424910125
+	},
+	{
+		"id": 17,
+		"name": "I KNOW?",
+		"artistId": 8,
+		"music": "/db/songs/i-know.mp3",
+		"plays": 6224914180
+	},
+	{
+		"id": 18,
+		"name": "Menhaye Yek",
+		"artistId": 7,
+		"music": "/db/songs/menhaye-yek.mp3",
+		"plays": 509801
+	},
+	{
+		"id": 19,
+		"name": "Kaj",
+		"artistId": 6,
+		"music": "/db/songs/kaj.mp3",
+		"plays": 2109861
+	},
+	{
+		"id": 20,
+		"name": "Hezar",
+		"artistId": 6,
+		"music": "/db/songs/hezar.mp3",
+		"plays": 2534278
+	}
+]

@@ -10,7 +10,7 @@
 .artist__name {
 	position: absolute;
 	bottom: 20px;
-	font-size: 55px;
+	font-size: 45px;
 	left: 15px;
 	z-index: 2;
 }

@@ -1,0 +1,22 @@
+[
+	{
+		"name": "UTOPIA",
+		"artistId": 8,
+		"songs": [16, 17]
+	},
+	{
+		"name": "Infinite",
+		"artistId": 5,
+		"songs": [3, 4, 5]
+	},
+	{
+		"name": "Zakhare Asli",
+		"artistId": 7,
+		"songs": [1, 2, 18]
+	},
+	{
+		"name": "Zoozanaghe",
+		"artistId": 6,
+		"songs": [19, 20]
+	}
+]

@@ -1,9 +1,3 @@
-body {
-	background-image: url("/images/fade.png");
-	background-repeat: no-repeat;
-	background-size: contain;
-}
-
 .header__icon {
 	margin-left: auto;
 	color: white;

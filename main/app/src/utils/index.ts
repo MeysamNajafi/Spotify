@@ -1,5 +1,10 @@
 import axios from "axios";
 
+interface ImageObject {
+	data: Array<number>;
+	format: string;
+}
+
 export const getHumanizedTime = async function (): Promise<string> {
 	try {
 		const timezoneKey = import.meta.env.VITE_TIMEZONE_API;
