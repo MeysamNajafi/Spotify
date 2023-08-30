@@ -17,3 +17,9 @@ export interface Song {
 	music: string;
 	plays: number;
 }
+
+export interface Album {
+	name: string;
+	artistId: number;
+	songs: Array<number>;
+}

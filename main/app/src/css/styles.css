@@ -7,6 +7,9 @@ body {
 	font-family: "Lato", sans-serif;
 	color: #fff;
 }
+button {
+	cursor: pointer;
+}
 .padding {
 	padding: 55px 20px 90px;
 }

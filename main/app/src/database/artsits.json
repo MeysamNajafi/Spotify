@@ -38,10 +38,5 @@
 		"id": 8,
 		"name": "Travis Scott",
 		"image": "/db/images/travis.jpeg"
-	},
-	{
-		"id": 9,
-		"name": "Drake",
-		"image": "/db/images/drake.jpeg"
 	}
 ]

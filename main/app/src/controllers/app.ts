@@ -1,6 +1,8 @@
 import FooterLayout from "../layouts/footer.ts";
 import { navigate } from "../main.ts";
 import { getPathname } from "../router.ts";
+import songsData from "../database/songs.json";
+import { Album, Song } from "../interfaces/index.ts";
 
 interface JsMediaTags {
 	read: Function;
@@ -115,5 +117,10 @@ export default class App {
 	}
 	deleteBodyStyles() {
 		document.body.attributeStyleMap.clear();
+	}
+	getAlbumFirstSong(album: Album): Song | undefined {
+		const firstSongId = album.songs[0];
+		const song = songsData.find((song: Song) => song.id === firstSongId);
+		return song;
 	}
 }
