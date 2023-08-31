@@ -59,6 +59,13 @@ class Library extends App {
 				</div> `
 			)
 			.join("");
+
+		document.querySelectorAll(".album-item").forEach((item, i) => {
+			item.addEventListener(
+				"click",
+				this.changePath.bind(null, "/artist/" + artistsData[i].id)
+			);
+		});
 	}
 	renderPlaylists() {
 		this.main.innerHTML = "";
@@ -68,7 +75,7 @@ class Library extends App {
                 <div class="album-item">
 					<img
 						src="${playlist.image}"
-						class="album-item__image album-item__image--rounded"
+						class="album-item__image"
 						alt="${playlist.name}"
 					/>
 					<p class="album-item__title">${playlist.name}</p>
@@ -88,7 +95,7 @@ class Library extends App {
 							<div class="album-item">
 								<img
 									src="${base64}"
-									class="album-item__image album-item__image--rounded"
+									class="album-item__image"
 									alt="${album.name}"
 								/>
 								<p class="album-item__title">${album.name}</p>

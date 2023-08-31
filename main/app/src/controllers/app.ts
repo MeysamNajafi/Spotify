@@ -115,7 +115,17 @@ export default class App {
 		window.history.pushState("", "", path);
 		navigate();
 	}
-	deleteBodyStyles() {
+	navigateBack(): void {
+		window.history.back();
+		addEventListener(
+			"popstate",
+			() => {
+				navigate();
+			},
+			{ once: true }
+		);
+	}
+	deleteBodyStyles(): void {
 		document.body.attributeStyleMap.clear();
 	}
 	getAlbumFirstSong(album: Album): Song | undefined {

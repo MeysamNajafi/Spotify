@@ -17,6 +17,7 @@ class Home extends App {
 
 		this.fakeLoading();
 		this.setData();
+		this.setEventListeners();
 	}
 	async setData() {
 		const artists: Array<Artist> = JSON.parse(JSON.stringify(artistsData));
@@ -48,6 +49,10 @@ class Home extends App {
 					</div>`;
 			});
 		}
+	}
+	setEventListeners() {
+		const btn = document.querySelector(".back-btn") as HTMLButtonElement;
+		btn.addEventListener("click", this.navigateBack.bind(null));
 	}
 }
 
