@@ -82,6 +82,13 @@ class Library extends App {
 				</div> `
 			)
 			.join("");
+
+		document.querySelectorAll(".album-item").forEach((item, i) => {
+			item.addEventListener(
+				"click",
+				this.changePath.bind(null, "/playlist/" + artistsData[i].id)
+			);
+		});
 	}
 	renderAlbums() {
 		this.main.innerHTML = "";
