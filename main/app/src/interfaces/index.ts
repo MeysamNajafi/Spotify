@@ -20,7 +20,9 @@ export interface Song {
 }
 
 export interface Album {
+	id: number;
 	name: string;
 	artistId: number;
 	songs: Array<number>;
+	year: number;
 }

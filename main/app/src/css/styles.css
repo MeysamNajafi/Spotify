@@ -12,6 +12,7 @@ button {
 }
 .padding {
 	padding: 55px 20px 90px;
+	position: relative;
 }
 .padding-x {
 	padding: 0px 20px 90px;
@@ -77,6 +78,7 @@ button {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	z-index: 1;
 }
 .footer-tab__item {
 	display: flex;

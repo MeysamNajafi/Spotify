@@ -86,29 +86,28 @@ export default class App {
 			containerEl.remove();
 		}, 1000);
 	}
-	async getSongCover(song: string, successHandler: Function) {
+	async getSongCover(song: string): Promise<string> {
 		const jsmediatags = window.jsmediatags as JsMediaTags;
 		let blob = await fetch("../../public" + song).then((r) => r.blob());
 
-		jsmediatags.read(blob, {
-			onSuccess: function (tag: any) {
-				const image = tag.tags.picture;
-				if (!image) return;
+		return new Promise((resolve, reject) => {
+			jsmediatags.read(blob, {
+				onSuccess: function (tag: any) {
+					const image = tag.tags.picture;
+					if (!image) return;
 
-				let base64String = "";
-				for (let i = 0; i < image.data.length; i++)
-					base64String += String.fromCharCode(image.data[i]);
+					let base64String = "";
+					for (let i = 0; i < image.data.length; i++)
+						base64String += String.fromCharCode(image.data[i]);
 
-				const base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
-				successHandler(base64);
-			},
-			onError: function (error: any) {
-				console.log(
-					"An error occurred while loading the cover image",
-					error.type,
-					error.info
-				);
-			},
+					const base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+					resolve(base64);
+				},
+				onError: function (error: any) {
+					console.log(error.type, error.info);
+					reject("An error occurred while loading the cover image");
+				},
+			});
 		});
 	}
 	changePath(path: string): void {

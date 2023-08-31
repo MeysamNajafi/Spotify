@@ -1,22 +1,30 @@
 [
 	{
+		"id": 1,
 		"name": "UTOPIA",
 		"artistId": 8,
-		"songs": [16, 17]
+		"songs": [16, 17],
+		"year": 2023
 	},
 	{
+		"id": 2,
 		"name": "Infinite",
 		"artistId": 5,
-		"songs": [3, 4, 5]
+		"songs": [3, 4, 5],
+		"year": 2022
 	},
 	{
+		"id": 3,
 		"name": "Zakhare Asli",
 		"artistId": 7,
-		"songs": [1, 2, 18]
+		"songs": [1, 2, 18],
+		"year": 2020
 	},
 	{
+		"id": 4,
 		"name": "Zoozanaghe",
 		"artistId": 6,
-		"songs": [19, 20]
+		"songs": [19, 20],
+		"year": 2021
 	}
 ]

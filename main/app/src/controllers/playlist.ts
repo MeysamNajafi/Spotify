@@ -2,7 +2,7 @@ import App from "./app";
 import playlistsData from "../database/playlists.json";
 import songsData from "../database/songs.json";
 import ArtistPage from "../views/artist.ts";
-import { PlaylistType, Song } from "../interfaces";
+import { Playlist as PlaylistType, Song } from "../interfaces";
 
 class Playlist extends App {
 	playlistId: number;
@@ -35,11 +35,11 @@ class Playlist extends App {
 		playlistNameEl.innerText = playlist.name;
 
 		const songs = songsData.filter((song: Song) =>
-			playlist.songs.find((plSong: PlaylistType) => plSong === song.id)
+			playlist.songs.find((plSong: number) => plSong === song.id)
 		);
 		for (const [i, song] of songs.entries()) {
-			this.getSongCover(song.music, (base64: string) => {
-				musicsEl.innerHTML += `<div class="music">
+			const base64 = await this.getSongCover(song.music);
+			musicsEl.innerHTML += `<div class="music">
 						<div class="music__info">
 							<p class="music__number">${i + 1}</p>
 							<img class="music__image" src="${base64}" alt="${song.name}" />
@@ -50,7 +50,6 @@ class Playlist extends App {
 						</div>
 						<img class="music__more" src="/images/more.svg" />
 					</div>`;
-			});
 		}
 	}
 	setEventListeners() {

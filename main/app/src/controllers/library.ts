@@ -86,20 +86,19 @@ class Library extends App {
 		document.querySelectorAll(".album-item").forEach((item, i) => {
 			item.addEventListener(
 				"click",
-				this.changePath.bind(null, "/playlist/" + artistsData[i].id)
+				this.changePath.bind(null, "/playlist/" + playlistsData[i].id)
 			);
 		});
 	}
-	renderAlbums() {
+	async renderAlbums() {
 		this.main.innerHTML = "";
-		albumsData
-			.map((album: Album) => {
-				const song = this.getAlbumFirstSong(album);
-				if (typeof song === "undefined") return;
+		for await (const [i, album] of albumsData.entries()) {
+			const song = this.getAlbumFirstSong(album);
+			if (typeof song === "undefined") return;
 
-				this.getSongCover(song.music, (base64: string) => {
-					this.main.innerHTML += `	
-							<div class="album-item">
+			const base64 = await this.getSongCover(song.music);
+			this.main.innerHTML += `	
+							<div class="album-item album-item-${album.id}" data-id="${album.id}">
 								<img
 									src="${base64}"
 									class="album-item__image"
@@ -107,9 +106,16 @@ class Library extends App {
 								/>
 								<p class="album-item__title">${album.name}</p>
 							</div> `;
-				});
-			})
-			.join("");
+			this.setAlbumListeners();
+		}
+	}
+	setAlbumListeners() {
+		document.querySelectorAll(".album-item").forEach((item, i) => {
+			item.addEventListener(
+				"click",
+				this.changePath.bind(null, "/album/" + albumsData[i].id)
+			);
+		});
 	}
 }
 

@@ -34,9 +34,9 @@ class Home extends App {
 		artistImageEl.src = foundedArtist.image;
 		artistNameEl.innerText = foundedArtist.name;
 
-		for (const [i, song] of artistSongs.entries()) {
-			this.getSongCover(song.music, (base64: string) => {
-				musicsEl.innerHTML += `<div class="music">
+		for await (const [i, song] of artistSongs.entries()) {
+			const base64 = await this.getSongCover(song.music);
+			musicsEl.innerHTML += `<div class="music">
 						<div class="music__info">
 							<p class="music__number">${i + 1}</p>
 							<img class="music__image" src="${base64}" alt="${song.name}" />
@@ -47,7 +47,6 @@ class Home extends App {
 						</div>
 						<img class="music__more" src="/images/more.svg" />
 					</div>`;
-			});
 		}
 	}
 	setEventListeners() {
