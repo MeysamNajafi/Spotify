@@ -56,7 +56,7 @@ class Album extends App {
 
 		for (const song of songs) {
 			musicsEl.innerHTML += `
-                        <div class="album-music">
+                        <div class="album-music" data-id="${song.id}">
                             <div>
                                 <p class="album-music__title">${song.name}</p>
                                 <div class="album-music__artist">
@@ -68,6 +68,12 @@ class Album extends App {
                         </div>
                 `;
 		}
+		document.querySelectorAll(".album-music").forEach((music) => {
+			music.addEventListener("click", () => {
+				const id = music.dataset.id;
+				this.changePath("/song/" + id);
+			});
+		});
 	}
 	setEventListeners() {
 		const btn = document.querySelector(".back-btn") as HTMLButtonElement;

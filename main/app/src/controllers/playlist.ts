@@ -37,9 +37,9 @@ class Playlist extends App {
 		const songs = songsData.filter((song: Song) =>
 			playlist.songs.find((plSong: number) => plSong === song.id)
 		);
-		for (const [i, song] of songs.entries()) {
+		for await (const [i, song] of songs.entries()) {
 			const base64 = await this.getSongCover(song.music);
-			musicsEl.innerHTML += `<div class="music">
+			musicsEl.innerHTML += `<div class="music" data-id="${song.id}">
 						<div class="music__info">
 							<p class="music__number">${i + 1}</p>
 							<img class="music__image" src="${base64}" alt="${song.name}" />
@@ -51,6 +51,12 @@ class Playlist extends App {
 						<img class="music__more" src="/images/more.svg" />
 					</div>`;
 		}
+		document.querySelectorAll(".music").forEach((music) => {
+			music.addEventListener("click", () => {
+				const id = music.dataset.id;
+				this.changePath("/song/" + id);
+			});
+		});
 	}
 	setEventListeners() {
 		const btn = document.querySelector(".back-btn") as HTMLButtonElement;

@@ -4,7 +4,7 @@ body {
 }
 
 .player-container {
-	padding-bottom: 40px;
+	padding-bottom: 40px !important;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -100,7 +100,7 @@ input[type="range"]::-moz-range-thumb {
 .music-control__btn {
 	position: relative;
 }
-.music-control__btn::after {
+.music-control__btn.active::after {
 	content: "";
 	position: absolute;
 	width: 5px;
@@ -109,6 +109,12 @@ input[type="range"]::-moz-range-thumb {
 	background-color: #57b560;
 	bottom: -10px;
 	right: 16px;
+}
+.music-control__btn path {
+	fill: #bababa;
+}
+.music-control__btn.active path {
+	fill: #57b560;
 }
 .music-control__pause {
 	width: 63px;
@@ -127,4 +133,12 @@ input[type="range"]::-moz-range-thumb {
 }
 .music-footer img {
 	width: 18px;
+}
+
+.like-btn path {
+	stroke: #bababa;
+}
+.like-btn.active path {
+	stroke: #57b560;
+	fill: #57b560;
 }

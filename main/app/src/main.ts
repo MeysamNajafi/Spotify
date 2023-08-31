@@ -13,6 +13,7 @@ import Search from "./controllers/search.ts";
 import Library from "./controllers/library.ts";
 import Playlist from "./controllers/playlist.ts";
 import Album from "./controllers/album.ts";
+import Player from "./controllers/player.ts";
 
 export const navigate = (): void => {
 	const pathname = getPathname();
@@ -23,6 +24,7 @@ export const navigate = (): void => {
 	if (pathname.startsWith("/artist")) new Artist();
 	if (pathname.startsWith("/playlist")) new Playlist();
 	if (pathname.startsWith("/album")) new Album();
+	if (pathname.startsWith("/song")) new Player();
 };
 
 window.addEventListener("load", () => {

@@ -66,3 +66,15 @@ export function getAverageRGB(imgEl) {
 
 	return rgb;
 }
+
+export function convertSecondsToTime(totalSeconds: number): string {
+	const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+	totalSeconds %= 3600;
+	const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+	const seconds = String(Math.floor(totalSeconds % 60)).padStart(2, "0");
+
+	let res = "";
+	if (hours !== "00") res += `${hours}:`;
+	res += `${minutes}:${seconds}`;
+	return res;
+}

@@ -12,11 +12,11 @@ interface JsMediaTags {
 
 export default class App {
 	app: HTMLDivElement;
-	constructor() {
+	constructor(footer = true) {
 		this.app = document.querySelector("#app") as HTMLDivElement;
 		this.app.innerHTML = "";
 		this.deleteBodyStyles();
-		this.setFooter();
+		if (footer) this.setFooter();
 	}
 	setFooter() {
 		this.app.innerHTML += FooterLayout;
