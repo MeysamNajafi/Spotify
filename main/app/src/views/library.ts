@@ -27,30 +27,7 @@ export default `
 				<button class="search__btn">Filters</button>
 			</section>
 			<main>
-				<div class="album-item">
-					<img
-						src="./assets/images/artwork.png"
-						class="album-item__image album-item__image--rounded"
-						alt=""
-					/>
-					<p class="album-item__title">The weekend</p>
-				</div>
-				<div class="album-item">
-					<img
-						src="./assets/images/artwork.png"
-						class="album-item__image album-item__image--rounded"
-						alt=""
-					/>
-					<p class="album-item__title">Petit Biscuit</p>
-				</div>
-				<div class="album-item">
-					<img
-						src="./assets/images/artwork.png"
-						class="album-item__image album-item__image--rounded"
-						alt=""
-					/>
-					<p class="album-item__title">Seven Lions</p>
-				</div>
+				
 			</main>
 		</div>
 `;

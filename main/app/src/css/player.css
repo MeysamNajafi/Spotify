@@ -134,11 +134,3 @@ input[type="range"]::-moz-range-thumb {
 .music-footer img {
 	width: 18px;
 }
-
-.like-btn path {
-	stroke: #bababa;
-}
-.like-btn.active path {
-	stroke: #57b560;
-	fill: #57b560;
-}

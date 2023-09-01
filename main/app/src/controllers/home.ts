@@ -5,11 +5,18 @@ import { Playlist } from "../interfaces";
 import IndexPage from "../views/index";
 
 class Home extends App {
+	likedButton: HTMLDivElement;
 	constructor() {
 		super();
 		this.init();
-		this.getPlaylists();
-		this.setStyles();
+
+		this.likedButton = document.querySelector("#liked") as HTMLDivElement;
+
+		setTimeout(() => {
+			this.getPlaylists();
+			this.setStyles();
+			this.setListeners();
+		}, 100);
 	}
 	async init() {
 		try {
@@ -47,6 +54,11 @@ class Home extends App {
 		} catch (err) {
 			console.log(err);
 		}
+	}
+	setListeners() {
+		this.likedButton.addEventListener("click", () => {
+			this.changePath("/liked");
+		});
 	}
 }
 

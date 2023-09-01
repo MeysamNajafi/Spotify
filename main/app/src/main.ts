@@ -14,6 +14,7 @@ import Library from "./controllers/library.ts";
 import Playlist from "./controllers/playlist.ts";
 import Album from "./controllers/album.ts";
 import Player from "./controllers/player.ts";
+import Liked from "./controllers/liked.ts";
 
 export let loads = 0;
 
@@ -27,6 +28,7 @@ export const navigate = (): void => {
 	if (pathname.startsWith("/playlist")) new Playlist();
 	if (pathname.startsWith("/album")) new Album();
 	if (pathname.startsWith("/song")) new Player();
+	if (pathname.startsWith("/liked")) new Liked();
 
 	loads++;
 };

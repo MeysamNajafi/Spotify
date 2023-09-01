@@ -227,3 +227,11 @@ button {
 		transform: translate(24px, 0);
 	}
 }
+
+.like-btn path {
+	stroke: #bababa;
+}
+.like-btn.active path {
+	stroke: #57b560;
+	fill: #57b560;
+}

@@ -80,6 +80,9 @@ class Player extends App {
 	setEventListeners() {
 		const self = this;
 
+		// check if video is liked
+		this.like(true);
+
 		// default icon for play/pause button
 		this.setPlayButtonIcon();
 
@@ -100,7 +103,7 @@ class Player extends App {
 		this.sliderEl.addEventListener("input", (event) => {
 			this.audioPlayerEl.pause();
 
-			const percentage = event.target.value;
+			const percentage = +(<HTMLInputElement>event.target).value;
 			const duration = this.audioPlayerEl.duration;
 			this.audioPlayerEl.currentTime = duration * (percentage / 100);
 			this.sliderEl.style.background = `linear-gradient(to right, #fff ${percentage}%, #474747 ${percentage}%)`;
@@ -141,7 +144,7 @@ class Player extends App {
 		this.repeatButton.addEventListener("click", this.repeat.bind(this));
 
 		// like event listener
-		this.likeButton.addEventListener("click", this.like.bind(this));
+		this.likeButton.addEventListener("click", this.like.bind(this, false));
 
 		// back event listener
 		this.backButton.addEventListener("click", () => {
@@ -160,18 +163,40 @@ class Player extends App {
 		this.shuffleButton.classList.toggle("active");
 		this.isShuffle = !this.isRepeat;
 	}
-	like() {
-		this.isLiked = !this.isLiked;
-		this.likeButton.classList.toggle("active");
+	like(init: boolean) {
+		const likedJson = localStorage.getItem("liked") || "[]";
+		let liked: Array<number> = JSON.parse(likedJson);
+
+		if (init) {
+			const wasLiked = liked.find((likedMusic) => likedMusic === this.songId);
+			if (wasLiked) {
+				this.isLiked = true;
+				this.likeButton.classList.add("active");
+			} else {
+				this.isLiked = false;
+				this.likeButton.classList.remove("active");
+			}
+		} else {
+			this.isLiked = !this.isLiked;
+
+			if (this.isLiked) {
+				liked.unshift(this.songId);
+				localStorage.setItem("liked", JSON.stringify(liked));
+			} else {
+				liked = liked.filter((likedMusic: number) => likedMusic !== this.songId);
+				localStorage.setItem("liked", JSON.stringify(liked));
+			}
+			this.likeButton.classList.toggle("active");
+		}
 	}
 	setPlayButtonIcon() {
-		if (!this.isPlaying) {
+		if (!this.isPlaying)
 			this.playButton.innerHTML = `
                             <svg  style="position:relative;left:3px" width="25" viewBox="0 0 18 20" fill="black" xmlns="http://www.w3.org/2000/svg">
                                 <path  fill="#181718" d="M1.75 19.4861C1.36111 19.7176 0.972223 19.7222 0.583334 19.5C0.194445 19.2685 0 18.9306 0 18.4861V1.51389C0 1.06944 0.194445 0.73611 0.583334 0.513888C0.972223 0.282407 1.36111 0.282407 1.75 0.513888L16.4306 8.98611C16.8194 9.21759 17.0139 9.55556 17.0139 10C17.0139 10.4444 16.8194 10.7824 16.4306 11.0139L1.75 19.4861Z" fill="white"/>
                             </svg>
                     `;
-		} else {
+		else
 			this.playButton.innerHTML = `
                             <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -180,7 +205,6 @@ class Player extends App {
                                 />
                             </svg>
                     `;
-		}
 	}
 }
 

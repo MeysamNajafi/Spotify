@@ -1,8 +1,8 @@
 export default `	
         <div class="padding">
 			<header class="header">
-				<div class="text-right">
-					<img class="header__icon" src="/images/settings.svg" />
+				<div class="text-right" id="liked">
+					<img class="header__icon" src="/images/like.svg" />
 				</div>
 				<h4 class="title time-welcome"></h4>
 			</header>
