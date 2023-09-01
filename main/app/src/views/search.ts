@@ -44,7 +44,6 @@ export default `
 			</button>
 		</header>
 		<div class="padding-x mt-6">
-			<p class="title">Recent searches</p>
 			<main></main>
 		</div>
         `;

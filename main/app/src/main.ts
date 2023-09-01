@@ -15,6 +15,8 @@ import Playlist from "./controllers/playlist.ts";
 import Album from "./controllers/album.ts";
 import Player from "./controllers/player.ts";
 
+export let loads = 0;
+
 export const navigate = (): void => {
 	const pathname = getPathname();
 
@@ -25,6 +27,8 @@ export const navigate = (): void => {
 	if (pathname.startsWith("/playlist")) new Playlist();
 	if (pathname.startsWith("/album")) new Album();
 	if (pathname.startsWith("/song")) new Player();
+
+	loads++;
 };
 
 window.addEventListener("load", () => {

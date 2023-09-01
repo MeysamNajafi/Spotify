@@ -9,7 +9,7 @@ export default `<div class="padding player-container">
 				</button>
 			</div>
 			<img class="music-cover" src="" alt="" />
-			<audio id="player" src=""></audio>
+			<audio autoplay id="player" src=""></audio>
 			<div>
 				<div class="music-info">
 					<div>
@@ -71,9 +71,7 @@ export default `<div class="padding player-container">
 					</svg>
 				</button>
 				<button class="music-control__pause">
-					 <svg style="position:relative;left:3px" width="25" viewBox="0 0 18 20" fill="black" xmlns="http://www.w3.org/2000/svg">
-                        <path  fill="#181718" d="M1.75 19.4861C1.36111 19.7176 0.972223 19.7222 0.583334 19.5C0.194445 19.2685 0 18.9306 0 18.4861V1.51389C0 1.06944 0.194445 0.73611 0.583334 0.513888C0.972223 0.282407 1.36111 0.282407 1.75 0.513888L16.4306 8.98611C16.8194 9.21759 17.0139 9.55556 17.0139 10C17.0139 10.4444 16.8194 10.7824 16.4306 11.0139L1.75 19.4861Z" fill="white"/>
-                    </svg>
+				
 				</button>
 				<button>
 					<svg
