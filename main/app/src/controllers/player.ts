@@ -22,6 +22,7 @@ class Player extends App {
 	songDurationEl: HTMLParagraphElement;
 	currentTimeEl: HTMLParagraphElement;
 	shuffleButton: HTMLButtonElement;
+	backButton: HTMLButtonElement;
 	repeatButton: HTMLButtonElement;
 	likeButton: HTMLButtonElement;
 
@@ -39,6 +40,7 @@ class Player extends App {
 		this.repeatButton = document.querySelector("#repeat") as HTMLButtonElement;
 		this.likeButton = document.querySelector(".like-btn") as HTMLButtonElement;
 		this.playButton = document.querySelector(".music-control__pause") as HTMLButtonElement;
+		this.backButton = document.querySelector("#back") as HTMLButtonElement;
 		this.audioPlayerEl = document.querySelector("audio") as HTMLAudioElement;
 		this.sliderEl = document.querySelector(".music-slider__input") as HTMLInputElement;
 
@@ -121,7 +123,6 @@ class Player extends App {
 		});
 
 		// audio event listener for change the input progress
-
 		this.audioPlayerEl.addEventListener("timeupdate", function (event) {
 			const currentTime = this.currentTime;
 			const duration = this.duration;
@@ -148,7 +149,13 @@ class Player extends App {
 		this.shuffleButton.addEventListener("click", this.shuffle.bind(this));
 		this.repeatButton.addEventListener("click", this.repeat.bind(this));
 
+		// like event listener
 		this.likeButton.addEventListener("click", this.like.bind(this));
+
+		// back event listener
+		this.backButton.addEventListener("click", () => {
+			this.navigateBack();
+		});
 	}
 	shuffle() {
 		this.isShuffle = !this.isShuffle;

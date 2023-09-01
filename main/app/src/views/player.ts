@@ -1,6 +1,6 @@
 export default `<div class="padding player-container">
 			<div class="titlebar">
-				<button>
+				<button id="back">
 					<img src="/images/arrow-down.svg" alt="" />
 				</button>
 				<p>Song</p>
