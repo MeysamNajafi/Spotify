@@ -106,7 +106,6 @@ class Player extends App {
 
 		// input event listener for change the music current time based on input value
 		this.sliderEl.addEventListener("input", (event) => {
-			console.log(event);
 			this.audioPlayerEl.pause();
 
 			const percentage = event.target.value;

@@ -39,7 +39,8 @@ class Playlist extends App {
 		);
 		for await (const [i, song] of songs.entries()) {
 			const base64 = await this.getSongCover(song.music);
-			musicsEl.innerHTML += `<div class="music" data-id="${song.id}">
+			musicsEl.innerHTML += `
+					<div class="music" data-id="${song.id}">
 						<div class="music__info">
 							<p class="music__number">${i + 1}</p>
 							<img class="music__image" src="${base64}" alt="${song.name}" />
