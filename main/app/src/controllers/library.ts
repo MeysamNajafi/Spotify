@@ -7,46 +7,75 @@ import { Album, Artist, Playlist } from "../interfaces";
 
 class Library extends App {
 	main: HTMLDivElement;
+	input: HTMLInputElement;
+	activeTab: string = "Album";
 	constructor() {
 		super();
 		this.init();
-		this.addListeners();
+		this.main = document.querySelector("main") as HTMLDivElement;
+		this.input = document.querySelector(".search__input") as HTMLInputElement;
+
+		setTimeout(() => {
+			this.renderAlbums();
+			this.addListeners();
+		}, 100);
 	}
 	async init() {
 		this.app.innerHTML += LibraryPage;
-		this.main = document.querySelector("main") as HTMLDivElement;
-		this.renderAlbums();
 	}
 	async addListeners() {
 		const artistsBtn = document.querySelector("#artists") as HTMLButtonElement;
 		const playlistsBtn = document.querySelector("#playlists") as HTMLButtonElement;
 		const albumsBtn = document.querySelector("#albums") as HTMLButtonElement;
 
+		// change active tab
 		artistsBtn.addEventListener("click", (e) => {
 			playlistsBtn.classList.remove("active");
 			albumsBtn.classList.remove("active");
-			e.target!.classList.add("active");
+			(<HTMLButtonElement>e.target)!.classList.add("active");
+			this.activeTab = "Artist";
 
 			this.renderArtists();
 		});
 		playlistsBtn.addEventListener("click", (e) => {
 			artistsBtn.classList.remove("active");
 			albumsBtn.classList.remove("active");
-			e.target!.classList.add("active");
+			(<HTMLButtonElement>e.target)!.classList.add("active");
+			this.activeTab = "Playlist";
 
 			this.renderPlaylists();
 		});
 		albumsBtn.addEventListener("click", (e) => {
 			artistsBtn.classList.remove("active");
 			playlistsBtn.classList.remove("active");
-			e.target!.classList.add("active");
+			(<HTMLButtonElement>e.target)!.classList.add("active");
+			this.activeTab = "Album";
 
 			this.renderAlbums();
 		});
+
+		// search functionality
+		this.input.addEventListener("input", (event) => {
+			const query = (<HTMLInputElement>event?.target).value;
+			const dataToSearch: Array<Playlist> | Array<Album> | Array<Artist> =
+				this.activeTab === "Album"
+					? albumsData
+					: this.activeTab === "Artist"
+					? artistsData
+					: playlistsData;
+
+			const data = dataToSearch.filter((item: Playlist | Album | Artist) =>
+				item.name.toLowerCase().includes(query.toLowerCase())
+			);
+			if (this.activeTab === "Album") this.renderAlbums(data);
+			if (this.activeTab === "Artist") this.renderArtists(data);
+			if (this.activeTab === "Playlist") this.renderPlaylists(data);
+		});
 	}
-	renderArtists() {
+	renderArtists(givenData: Array<Playlist> | undefined = undefined) {
+		const data = givenData || playlistsData;
 		this.main.innerHTML = "";
-		this.main.innerHTML = artistsData
+		this.main.innerHTML = data
 			.map(
 				(artist: Artist) => `	
                 <div class="album-item">
@@ -67,9 +96,10 @@ class Library extends App {
 			);
 		});
 	}
-	renderPlaylists() {
+	renderPlaylists(givenData: Array<Playlist> | undefined = undefined) {
+		const data = givenData || playlistsData;
 		this.main.innerHTML = "";
-		this.main.innerHTML = playlistsData
+		this.main.innerHTML = data
 			.map(
 				(playlist: Playlist) => `	
                 <div class="album-item">
@@ -90,9 +120,10 @@ class Library extends App {
 			);
 		});
 	}
-	async renderAlbums() {
+	async renderAlbums(givenData: Array<Album> | undefined = undefined) {
+		const data = givenData || albumsData;
 		this.main.innerHTML = "";
-		for await (const [i, album] of albumsData.entries()) {
+		for await (const album of data) {
 			const song = this.getAlbumFirstSong(album);
 			if (typeof song === "undefined") return;
 
