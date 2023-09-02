@@ -79,7 +79,6 @@ class Player extends App {
 
 		// retrieve the saved blob
 		try {
-			const src: string = this.audioPlayerEl.src;
 			const savedbuffer = await getFile(this.songId);
 			if (typeof savedbuffer === "number") {
 				const buffer = await this.convertAudioToArrayBuffer(song.music);
