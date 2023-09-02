@@ -26,3 +26,8 @@ export interface Album {
 	songs: Array<number>;
 	year: number;
 }
+
+export interface SavedData {
+	songId: number;
+	buffer: ArrayBuffer;
+}

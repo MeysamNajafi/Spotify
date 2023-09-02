@@ -3,6 +3,7 @@ import { navigate } from "../main.ts";
 import { getPathname } from "../router.ts";
 import songsData from "../database/songs.json";
 import { Album, Song } from "../interfaces/index.ts";
+import { connect } from "../models/index.ts";
 
 interface JsMediaTags {
 	read: Function;
@@ -13,6 +14,7 @@ interface JsMediaTags {
 export default class App {
 	app: HTMLDivElement;
 	constructor(footer = true) {
+		connect();
 		this.app = document.querySelector("#app") as HTMLDivElement;
 		this.app.innerHTML = "";
 		this.deleteBodyStyles();

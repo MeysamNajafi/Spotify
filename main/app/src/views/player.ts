@@ -9,7 +9,9 @@ export default `<div class="padding player-container">
 				</button>
 			</div>
 			<img class="music-cover" src="" alt="" />
-			<audio autoplay id="player" src=""></audio>
+			<audio autoplay id="player" src="">
+				<source></source>
+			</audio>
 			<div>
 				<div class="music-info">
 					<div>

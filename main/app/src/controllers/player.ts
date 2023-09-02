@@ -5,6 +5,7 @@ import PlayerPage from "../views/player.ts";
 import { Artist, Song } from "../interfaces";
 import { convertSecondsToTime } from "../utils/index.ts";
 import { loads } from "../main.ts";
+import DB, { getFile, saveFile } from "../models/index.ts";
 
 class Player extends App {
 	songId: number;
@@ -75,7 +76,23 @@ class Player extends App {
 		this.musicCoverEl.src = img;
 		this.musicTitleEl.innerText = song.name;
 		this.musicArtistEl.innerText = artist.name;
-		this.audioPlayerEl.src = song.music;
+
+		// retrieve the saved blob
+		try {
+			const src: string = this.audioPlayerEl.src;
+			const savedbuffer = await getFile(this.songId);
+			if (typeof savedbuffer === "number") {
+				const buffer = await this.convertAudioToArrayBuffer(song.music);
+
+				await saveFile(buffer, this.songId);
+				this.audioPlayerEl.src = song.music;
+			} else {
+				this.audioPlayerEl.querySelector("source") as HTMLSourceElement;
+				this.audioPlayerEl.src = URL.createObjectURL(new Blob([savedbuffer]));
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	}
 	setEventListeners() {
 		const self = this;
@@ -205,6 +222,15 @@ class Player extends App {
                                 />
                             </svg>
                     `;
+	}
+	async convertAudioToArrayBuffer(src: string): Promise<ArrayBuffer> {
+		try {
+			const res = await fetch(src);
+			const arraybuffer = await res.arrayBuffer();
+			return arraybuffer;
+		} catch (err) {
+			console.log("An error occurred while converting file");
+		}
 	}
 }
 
