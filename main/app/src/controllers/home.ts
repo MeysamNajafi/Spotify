@@ -42,18 +42,22 @@ class Home extends App {
 	}
 	async getPlaylists() {
 		const recentEl = document.querySelector(".recent") as HTMLHeadingElement;
-		try {
-			recentEl.innerHTML = JSON.parse(JSON.stringify(playlists))
-				.map(
-					(item: Playlist) => `<div class="recent__card">
+
+		recentEl.innerHTML = JSON.parse(JSON.stringify(playlists))
+			.map(
+				(item: Playlist) => `<div class="recent__card" data-id="${item.id}">
 								<img class="recent__image" src=${item.image} />
 								<p class="recent__title">${item.name}</p>
 							</div>`
-				)
-				.join("");
-		} catch (err) {
-			console.log(err);
-		}
+			)
+			.join("");
+
+		recentEl.addEventListener("click", (e) => {
+			const item = (<HTMLDivElement>e.target).closest(".recent__card") as HTMLDivElement;
+			if (!item) return;
+			const id = item.dataset.id;
+			this.changePath("/playlist/" + id);
+		});
 	}
 	setListeners() {
 		this.likedButton.addEventListener("click", () => {

@@ -143,6 +143,7 @@ button {
 }
 .music__number {
 	font-size: 13px;
+	margin-right: 10px;
 }
 .music__image {
 	width: 52px;

@@ -49,10 +49,12 @@ class Home extends App {
 					</div>`;
 		}
 		document.querySelectorAll(".music").forEach((music) => {
-			music.addEventListener("click", () => {
-				const id = music.dataset.id;
-				this.changePath("/song/" + id);
-			});
+			if (music instanceof HTMLElement) {
+				music.addEventListener("click", () => {
+					const id = music.dataset.id;
+					this.changePath("/song/" + id);
+				});
+			}
 		});
 	}
 	setEventListeners() {
