@@ -1,6 +1,7 @@
 import { SavedData } from "../interfaces";
 let DB: IDBDatabase;
 
+// connct to database
 export const connect = () => {
 	if (!window.indexedDB) {
 		console.log("Indexed DB is not supported!");
@@ -16,6 +17,7 @@ export const connect = () => {
 		DB = request.result;
 	};
 	request.onupgradeneeded = (event) => {
+		if (!event.target) return;
 		DB = event.target.result;
 
 		const objectStore = DB.createObjectStore("saved", { keyPath: "songId" });
@@ -23,6 +25,7 @@ export const connect = () => {
 	};
 };
 
+// save music file as ArrayBuffer
 export const saveFile = (arrayBuffer: ArrayBuffer, songId: number): Promise<void> => {
 	const transaction = DB.transaction("saved", "readwrite");
 	const objectStore = transaction.objectStore("saved");
@@ -38,6 +41,8 @@ export const saveFile = (arrayBuffer: ArrayBuffer, songId: number): Promise<void
 		};
 	});
 };
+
+// get ArrayBuffer by songId
 export const getFile = (songId: number): Promise<ArrayBuffer | number> => {
 	const transaction = DB.transaction("saved");
 	const objectStore = transaction.objectStore("saved");
@@ -58,5 +63,3 @@ export const getFile = (songId: number): Promise<ArrayBuffer | number> => {
 		};
 	});
 };
-
-export default DB;

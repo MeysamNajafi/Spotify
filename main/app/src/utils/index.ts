@@ -1,10 +1,12 @@
 import axios from "axios";
 
-interface ImageObject {
-	data: Array<number>;
-	format: string;
+interface RGB {
+	r: number;
+	g: number;
+	b: number;
 }
 
+// get the HumanizedTime for the hom page (morning, afternoon, evening, ...)
 export const getHumanizedTime = async function (): Promise<string> {
 	try {
 		const timezoneKey = import.meta.env.VITE_TIMEZONE_API;
@@ -21,7 +23,7 @@ export const getHumanizedTime = async function (): Promise<string> {
 	}
 };
 
-export function getAverageRGB(imgEl) {
+export function getAverageRGB(imgEl: HTMLImageElement): RGB {
 	var blockSize = 5, // only visit every 5 pixels
 		defaultRGB = { r: 0, g: 0, b: 0 }, // for non-supporting envs
 		canvas = document.createElement("canvas"),

@@ -10,6 +10,11 @@ interface JsMediaTags {
 	Reader: object;
 	Cofig: Object;
 }
+declare global {
+	interface Window {
+		jsmediatags: JsMediaTags;
+	}
+}
 
 export default class App {
 	app: HTMLDivElement;
@@ -20,6 +25,7 @@ export default class App {
 		this.deleteBodyStyles();
 		if (footer) this.setFooter();
 	}
+	// set footer and event listeners
 	setFooter() {
 		this.app.innerHTML += FooterLayout;
 
@@ -34,6 +40,7 @@ export default class App {
 		else if (pathname === "/search") searchIcon.src = "/images/search-enabled.svg";
 		else if (pathname === "/library") libraryIcon.src = "/images/library-enabled.svg";
 
+		// reference: https://www.macarthur.me/posts/when-dom-updates-appear-to-be-asynchronous
 		setTimeout(() => {
 			const homeBtn = document.querySelector("#footer--home") as HTMLButtonElement;
 			const libraryBtn = document.querySelector("#footer--library") as HTMLButtonElement;
@@ -68,6 +75,7 @@ export default class App {
 			containerEl.remove();
 		}
 	}
+	// fake loading to simulate fetching data from server
 	fakeLoading() {
 		const bodyEl = document.querySelector("body") as HTMLBodyElement;
 
@@ -88,6 +96,8 @@ export default class App {
 			containerEl.remove();
 		}, 1000);
 	}
+	// extract song's cover from the song
+	// I could choose a photo for each song in the data, but I decided to directly extract the photo from the song. That's why I had to use JsMediaTags package
 	async getSongCover(song: string): Promise<string> {
 		const jsmediatags = window.jsmediatags as JsMediaTags;
 		let blob = await fetch("../../public" + song).then((r) => r.blob());
@@ -112,6 +122,7 @@ export default class App {
 			});
 		});
 	}
+	// change the url to render new markup
 	changePath(path: string): void {
 		window.history.pushState("", "", path);
 		navigate();

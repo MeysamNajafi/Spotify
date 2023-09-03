@@ -29,9 +29,12 @@ class Search extends App {
 			this.query = (<HTMLInputElement>e.target).value.toLowerCase();
 			this.findAndSetMarkup();
 		});
+
+		// attaching the event listener to whole container
 		this.container.addEventListener("click", (e) => {
 			const el = e.target as HTMLElement;
 
+			// click outside of any result
 			if (el.nodeName === "MAIN") return;
 
 			const targetDiv = <HTMLDivElement>el.closest("#data-container");
@@ -43,6 +46,7 @@ class Search extends App {
 	async findAndSetMarkup(): Promise<void> {
 		this.container.innerHTML = "";
 
+		// render founded artists
 		this.container.innerHTML += artistsData
 			.filter((artist: Artist) => artist.name.toLowerCase().includes(this.query))
 			.map(
@@ -58,6 +62,7 @@ class Search extends App {
 			)
 			.join("");
 
+		// render founded playlists
 		this.container.innerHTML += playlistsData
 			.filter((playlist: Playlist) => playlist.name.toLowerCase().includes(this.query))
 			.map((playlist: Playlist) => {
@@ -73,6 +78,7 @@ class Search extends App {
 			})
 			.join("");
 
+		// render founded songs
 		const filteredSongs = songsData.filter((song: Song) =>
 			song.name.toLowerCase().includes(this.query)
 		);
@@ -90,6 +96,7 @@ class Search extends App {
 					</div>`;
 		}
 
+		// render founded albums
 		const filteredAlbums = albumsData.filter((album: Album) =>
 			album.name.toLowerCase().includes(this.query)
 		);

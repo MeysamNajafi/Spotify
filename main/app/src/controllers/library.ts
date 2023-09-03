@@ -16,6 +16,7 @@ class Library extends App {
 		this.input = document.querySelector(".search__input") as HTMLInputElement;
 
 		setTimeout(() => {
+			// the default tab is albums so the albums will be rendered on init
 			this.renderAlbums();
 			this.addListeners();
 		}, 100);
@@ -54,7 +55,7 @@ class Library extends App {
 			this.renderAlbums();
 		});
 
-		// search functionality
+		// search functionality based on active tab
 		this.input.addEventListener("input", (event) => {
 			const query = (<HTMLInputElement>event?.target).value;
 			const dataToSearch: Array<Playlist> | Array<Album> | Array<Artist> =

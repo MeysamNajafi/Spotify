@@ -69,6 +69,8 @@ class Album extends App {
                 `;
 		}
 		document.querySelectorAll(".album-music").forEach((music) => {
+			if (!(music instanceof HTMLElement)) return;
+
 			music.addEventListener("click", () => {
 				const id = music.dataset.id;
 				this.changePath("/song/" + id);

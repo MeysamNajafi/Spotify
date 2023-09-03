@@ -16,8 +16,16 @@ import Album from "./controllers/album.ts";
 import Player from "./controllers/player.ts";
 import Liked from "./controllers/liked.ts";
 
+// ========= IMPORTANT =========
+// setTimeout has been used in several places of the program to set the event listeners
+// reference: https://www.macarthur.me/posts/when-dom-updates-appear-to-be-asynchronous
+// ========= IMPORTANT =========
+
+// It is not possible to play the song automatically when the user has not yet connected with the page.
+// Therefore, this variable helps to play the song automatically if the song page is not the first page loaded
 export let loads = 0;
 
+// find the related class to current path to generate markup in page
 export const navigate = (): void => {
 	const pathname = getPathname();
 
@@ -33,6 +41,7 @@ export const navigate = (): void => {
 	loads++;
 };
 
+// first load
 window.addEventListener("load", () => {
 	navigate();
 });

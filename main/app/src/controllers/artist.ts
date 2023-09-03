@@ -25,7 +25,6 @@ class Home extends App {
 
 		const foundedArtist: Artist | undefined = artists[this.artistId - 1];
 		const artistSongs: Array<Song> = songs.filter((song) => song.artistId === this.artistId);
-		const songsImages: Array<string> = [];
 		if (typeof foundedArtist === "undefined") window.location.pathname = "/";
 
 		const artistImageEl = document.querySelector(".artist__image") as HTMLImageElement;

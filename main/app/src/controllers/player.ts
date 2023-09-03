@@ -5,7 +5,7 @@ import PlayerPage from "../views/player.ts";
 import { Artist, Song } from "../interfaces";
 import { convertSecondsToTime } from "../utils/index.ts";
 import { loads } from "../main.ts";
-import DB, { getFile, saveFile } from "../models/index.ts";
+import { getFile, saveFile } from "../models/index.ts";
 
 class Player extends App {
 	songId: number;
@@ -80,8 +80,11 @@ class Player extends App {
 		// retrieve the saved blob
 		try {
 			const savedbuffer = await getFile(this.songId);
+
+			// if savedbuffer equals to 404 then it means there wasn't any saved buffer and song wasn't saved in indexedDB
 			if (typeof savedbuffer === "number") {
 				const buffer = await this.convertAudioToArrayBuffer(song.music);
+				if (buffer === undefined) return;
 
 				await saveFile(buffer, this.songId);
 				this.audioPlayerEl.src = song.music;
@@ -183,6 +186,7 @@ class Player extends App {
 		const likedJson = localStorage.getItem("liked") || "[]";
 		let liked: Array<number> = JSON.parse(likedJson);
 
+		// init state helps to show the song is liked already or no when the page renders
 		if (init) {
 			const wasLiked = liked.find((likedMusic) => likedMusic === this.songId);
 			if (wasLiked) {
@@ -222,7 +226,7 @@ class Player extends App {
                             </svg>
                     `;
 	}
-	async convertAudioToArrayBuffer(src: string): Promise<ArrayBuffer> {
+	async convertAudioToArrayBuffer(src: string): Promise<ArrayBuffer | undefined> {
 		try {
 			const res = await fetch(src);
 			const arraybuffer = await res.arrayBuffer();
