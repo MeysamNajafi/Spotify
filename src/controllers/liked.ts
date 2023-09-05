@@ -1,10 +1,6 @@
 import App from "./app";
-import artistsData from "../database/artsits.json";
-import playlistsData from "../database/playlists.json";
-import albumsData from "../database/albums.json";
 import songsData from "../database/songs.json";
-import SearchPage from "../views/search.ts";
-import { Artist, Playlist, Song, Album } from "../interfaces";
+import { Song } from "../interfaces";
 import LikedPage from "../views/liked.ts";
 import { getFile } from "../models/index.ts";
 

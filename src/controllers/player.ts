@@ -139,12 +139,12 @@ class Player extends App {
 		});
 
 		// get the duration of song when audio was is downloaded
-		this.audioPlayerEl.addEventListener("loadeddata", function (e) {
+		this.audioPlayerEl.addEventListener("loadeddata", function () {
 			self.songDurationEl.innerText = convertSecondsToTime(this.duration);
 		});
 
 		// audio event listener for change the input progress
-		this.audioPlayerEl.addEventListener("timeupdate", function (event) {
+		this.audioPlayerEl.addEventListener("timeupdate", function () {
 			const currentTime = this.currentTime;
 			const duration = this.duration;
 			let percentage = +((currentTime / duration) * 100).toFixed(2);
