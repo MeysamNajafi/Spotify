@@ -124,7 +124,10 @@ export default class App {
 	}
 	// change the url to render new markup
 	changePath(path: string): void {
-		window.history.pushState("", "", path);
+		if (path.startsWith("/song") && getPathname().startsWith("/song"))
+			window.history.replaceState("", "", path);
+		// replaceState if the user is in a song page and wants to go to another song page
+		else window.history.pushState("", "", path);
 		navigate();
 	}
 	navigateBack(): void {
@@ -144,5 +147,24 @@ export default class App {
 		const firstSongId = album.songs[0];
 		const song = songsData.find((song: Song) => song.id === firstSongId);
 		return song;
+	}
+	queueGenerator(songs: Array<number>): void {
+		const queueSongs = [...songs];
+		const isShuffle = localStorage.getItem("isShuffle") === "true" ? true : false;
+
+		// musics data is needed for repeat mode
+		if (!localStorage.getItem("musics"))
+			localStorage.setItem("musics", JSON.stringify(queueSongs));
+
+		if (isShuffle) {
+			for (let i = queueSongs.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[queueSongs[i], queueSongs[j]] = [queueSongs[j], queueSongs[i]];
+			}
+		}
+		localStorage.setItem("queue", JSON.stringify(queueSongs));
+
+		// cursor points to index of current song in queue
+		localStorage.setItem("cursor", "0");
 	}
 }

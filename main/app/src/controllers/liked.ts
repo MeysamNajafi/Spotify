@@ -10,12 +10,15 @@ import LikedPage from "../views/liked.ts";
 class Liked extends App {
 	container: HTMLDivElement;
 	backButton: HTMLButtonElement;
+	shuffleButton: HTMLButtonElement;
+	liked: Array<number> = [];
 
 	constructor() {
 		super();
 		this.init();
 		this.container = document.querySelector(".liked-musics-container") as HTMLDivElement;
 		this.backButton = document.querySelector(".back-btn") as HTMLButtonElement;
+		this.shuffleButton = document.querySelector(".shuffle-btn") as HTMLButtonElement;
 
 		setTimeout(() => {
 			this.setMarkup();
@@ -28,6 +31,7 @@ class Liked extends App {
 		const likedJson = localStorage.getItem("liked") || "[]";
 		let liked: Array<number> = JSON.parse(likedJson);
 		const likedSongs: Array<Song> = songsData.filter((song: Song) => liked.includes(song.id));
+		this.liked = liked;
 
 		for await (const song of likedSongs) {
 			const base64 = await this.getSongCover(song.music);
@@ -77,12 +81,20 @@ class Liked extends App {
 
 		// back functionality
 		this.backButton.addEventListener("click", this.navigateBack.bind(null));
+		this.shuffleButton.addEventListener("click", this.shuffle.bind(this));
 	}
 	unlike(songId: number) {
 		const likedJson = localStorage.getItem("liked") || "[]";
 		let liked: Array<number> = JSON.parse(likedJson);
 		liked = liked.filter((likedMusic: number) => likedMusic !== songId);
 		localStorage.setItem("liked", JSON.stringify(liked));
+	}
+	shuffle() {
+		localStorage.setItem("isShuffle", "true");
+		this.queueGenerator(this.liked);
+		const queue: Array<number> = JSON.parse(localStorage.getItem("queue") as string);
+
+		this.changePath("/song/" + queue[0]);
 	}
 }
 

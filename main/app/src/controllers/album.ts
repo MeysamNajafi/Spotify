@@ -8,18 +8,24 @@ import { getAverageRGB } from "../utils/index.ts";
 
 class Album extends App {
 	albumId: number;
+	shuffleBtn: HTMLButtonElement;
+	album: AlbumType;
 	constructor() {
 		super();
 
 		this.albumId = +window.location.pathname.split("/")[2];
 		this.init();
+		this.shuffleBtn = document.querySelector(".play-button--green") as HTMLButtonElement;
+
+		setTimeout(() => {
+			this.setData();
+			this.setEventListeners();
+		}, 100);
 	}
 	async init() {
 		this.app.innerHTML += AlbumPage;
 
 		this.fakeLoading();
-		this.setData();
-		this.setEventListeners();
 	}
 	async setData() {
 		const album: AlbumType | undefined = albumsData.find(
@@ -29,6 +35,7 @@ class Album extends App {
 			window.location.pathname = "/";
 			return;
 		}
+		this.album = album;
 		const artist = artistsData.find((artist: Artist) => artist.id === album.artistId) as Artist;
 		const songs = songsData.filter((song: Song) =>
 			album.songs.find((albumSong: number) => albumSong === song.id)
@@ -72,6 +79,9 @@ class Album extends App {
 			if (!(music instanceof HTMLElement)) return;
 
 			music.addEventListener("click", () => {
+				// create queue
+				this.queueGenerator(album.songs);
+
 				const id = music.dataset.id;
 				this.changePath("/song/" + id);
 			});
@@ -80,6 +90,14 @@ class Album extends App {
 	setEventListeners() {
 		const btn = document.querySelector(".back-btn") as HTMLButtonElement;
 		btn.addEventListener("click", this.navigateBack.bind(null));
+		this.shuffleBtn.addEventListener("click", this.shuffle.bind(this));
+	}
+	shuffle() {
+		localStorage.setItem("isShuffle", "true");
+		this.queueGenerator(this.album.songs);
+		const queue: Array<number> = JSON.parse(localStorage.getItem("queue") as string);
+
+		this.changePath("/song/" + queue[0]);
 	}
 }
 

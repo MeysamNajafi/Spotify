@@ -27,11 +27,13 @@ class Player extends App {
 	backButton: HTMLButtonElement;
 	repeatButton: HTMLButtonElement;
 	likeButton: HTMLButtonElement;
+	nextButton: HTMLButtonElement;
+	prevButton: HTMLButtonElement;
 
 	constructor() {
 		super(false);
-
 		this.songId = +window.location.pathname.split("/")[2];
+
 		this.init();
 		this.musicCoverEl = document.querySelector(".music-cover") as HTMLImageElement;
 		this.musicTitleEl = document.querySelector(".music-title") as HTMLParagraphElement;
@@ -43,8 +45,15 @@ class Player extends App {
 		this.likeButton = document.querySelector(".like-btn") as HTMLButtonElement;
 		this.playButton = document.querySelector(".music-control__pause") as HTMLButtonElement;
 		this.backButton = document.querySelector("#back") as HTMLButtonElement;
+		this.prevButton = document.querySelector("#prev") as HTMLButtonElement;
+		this.nextButton = document.querySelector("#next") as HTMLButtonElement;
 		this.audioPlayerEl = document.querySelector("audio") as HTMLAudioElement;
 		this.sliderEl = document.querySelector(".music-slider__input") as HTMLInputElement;
+
+		// get previous value of shuffle and repeat
+		this.isShuffle = localStorage.getItem("isShuffle") === "true" ? true : false;
+		this.isRepeat = localStorage.getItem("isRepeat") === "true" ? true : false;
+		if (!this.isShuffle && !this.isRepeat) this.isShuffle = true;
 
 		// reference: https://www.macarthur.me/posts/when-dom-updates-appear-to-be-asynchronous
 		setTimeout(() => {
@@ -55,7 +64,6 @@ class Player extends App {
 	async init() {
 		this.app.innerHTML += PlayerPage;
 		this.app.style.height = "100%";
-		this.fakeLoading();
 	}
 	async setData() {
 		const song: Song | undefined = songsData.find((song: Song) => song.id === this.songId);
@@ -156,7 +164,7 @@ class Player extends App {
 		// shuffle and repeat
 		// set default values for shuffle and repeat
 		if (this.isShuffle) this.shuffleButton.classList.add("active");
-		if (this.isRepeat) this.shuffleButton.classList.add("active");
+		if (this.isRepeat) this.repeatButton.classList.add("active");
 
 		// shuffle and repeat event listeners
 		this.shuffleButton.addEventListener("click", this.shuffle.bind(this));
@@ -169,18 +177,65 @@ class Player extends App {
 		this.backButton.addEventListener("click", () => {
 			this.navigateBack();
 		});
+
+		// next music and prev music event listeners
+		this.nextButton.addEventListener("click", this.nextMusic.bind(this));
+		this.prevButton.addEventListener("click", this.prevMusic.bind(this));
+	}
+	nextMusic() {
+		const queueJson = localStorage.getItem("queue");
+		let cursor = localStorage.getItem("cursor") || 0;
+		if (!queueJson) return;
+
+		if (typeof cursor === "string") cursor = +cursor;
+		const queue: Array<number> = JSON.parse(queueJson);
+
+		cursor += 1;
+		if (cursor > queue.length - 1) cursor = 0; // queue is ended so start again;
+		localStorage.setItem("cursor", cursor.toString());
+		this.changePath("/song/" + queue[cursor]);
+	}
+	prevMusic() {
+		const queueJson = localStorage.getItem("queue");
+		let cursor = localStorage.getItem("cursor") || 0;
+		if (!queueJson) return;
+
+		if (typeof cursor === "string") cursor = +cursor;
+		const queue: Array<number> = JSON.parse(queueJson);
+
+		cursor -= 1;
+		if (cursor < 0) cursor = 0; // queue is ended so start again;
+		localStorage.setItem("cursor", cursor.toString());
+		this.changePath("/song/" + queue[cursor]);
 	}
 	shuffle() {
+		// UI
 		this.isShuffle = !this.isShuffle;
 		this.repeatButton.classList.toggle("active");
 		this.shuffleButton.classList.toggle("active");
 		this.isRepeat = !this.isShuffle;
+
+		localStorage.setItem("isShuffle", this.isShuffle ? "true" : "false");
+		localStorage.setItem("isRepeat", this.isRepeat ? "true" : "false");
+
+		// shuffle queue
+		const queueJson = localStorage.getItem("queue");
+		if (!queueJson) return;
+		this.queueGenerator(JSON.parse(queueJson));
 	}
 	repeat() {
+		// UI
 		this.isRepeat = !this.isRepeat;
 		this.repeatButton.classList.toggle("active");
 		this.shuffleButton.classList.toggle("active");
 		this.isShuffle = !this.isRepeat;
+		localStorage.setItem("isShuffle", this.isShuffle ? "true" : "false");
+		localStorage.setItem("isRepeat", this.isRepeat ? "true" : "false");
+
+		// repeat mode queue
+		const musicsJson = localStorage.getItem("musics");
+		if (!musicsJson) return;
+		this.queueGenerator(JSON.parse(musicsJson));
 	}
 	like(init: boolean) {
 		const likedJson = localStorage.getItem("liked") || "[]";
@@ -234,6 +289,9 @@ class Player extends App {
 		} catch (err) {
 			console.log("An error occurred while converting file");
 		}
+	}
+	randomInteger(min: number, max: number): number {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 }
 

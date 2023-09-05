@@ -6,18 +6,24 @@ import { Artist, Song } from "../interfaces";
 
 class Home extends App {
 	artistId: number;
+	artistSongsId: Array<number>;
+	shuffleBtn: HTMLButtonElement;
 	constructor() {
 		super();
 
 		this.artistId = +window.location.pathname.split("/")[2];
 		this.init();
+
+		this.shuffleBtn = document.querySelector(".play-button--green") as HTMLButtonElement;
+		setTimeout(() => {
+			this.setData();
+			this.setEventListeners();
+		}, 100);
 	}
 	async init() {
 		this.app.innerHTML += ArtistPage;
 
 		this.fakeLoading();
-		this.setData();
-		this.setEventListeners();
 	}
 	async setData() {
 		const artists: Array<Artist> = JSON.parse(JSON.stringify(artistsData));
@@ -25,6 +31,8 @@ class Home extends App {
 
 		const foundedArtist: Artist | undefined = artists[this.artistId - 1];
 		const artistSongs: Array<Song> = songs.filter((song) => song.artistId === this.artistId);
+		const artistSongsId: Array<number> = artistSongs.map((song: Song) => song.id);
+		this.artistSongsId = artistSongsId;
 		if (typeof foundedArtist === "undefined") window.location.pathname = "/";
 
 		const artistImageEl = document.querySelector(".artist__image") as HTMLImageElement;
@@ -50,6 +58,9 @@ class Home extends App {
 		document.querySelectorAll(".music").forEach((music) => {
 			if (music instanceof HTMLElement) {
 				music.addEventListener("click", () => {
+					// create queue
+					this.queueGenerator(artistSongsId);
+
 					const id = music.dataset.id;
 					this.changePath("/song/" + id);
 				});
@@ -59,6 +70,14 @@ class Home extends App {
 	setEventListeners() {
 		const btn = document.querySelector(".back-btn") as HTMLButtonElement;
 		btn.addEventListener("click", this.navigateBack.bind(null));
+		this.shuffleBtn.addEventListener("click", this.shuffle.bind(this));
+	}
+	shuffle() {
+		localStorage.setItem("isShuffle", "true");
+		this.queueGenerator(this.artistSongsId);
+		const queue: Array<number> = JSON.parse(localStorage.getItem("queue") as string);
+
+		this.changePath("/song/" + queue[0]);
 	}
 }
 

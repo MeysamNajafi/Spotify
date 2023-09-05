@@ -38,6 +38,13 @@ export const navigate = (): void => {
 	if (pathname.startsWith("/song")) new Player();
 	if (pathname.startsWith("/liked")) new Liked();
 
+	// delete queue whenever user goes out from player
+	if (!pathname.startsWith("/song")) {
+		localStorage.removeItem("queue");
+		localStorage.removeItem("musics");
+		localStorage.removeItem("cursor");
+	}
+
 	loads++;
 };
 

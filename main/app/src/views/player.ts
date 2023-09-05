@@ -57,7 +57,7 @@ export default `<div class="padding player-container">
 						/>
 					</svg>
 				</button>
-				<button>
+				<button id="prev">
 					<svg
 						width="23"
 						height="25"
@@ -72,9 +72,8 @@ export default `<div class="padding player-container">
 					</svg>
 				</button>
 				<button class="music-control__pause">
-				
 				</button>
-				<button>
+				<button id="next">
 					<svg
 						width="23"
 						height="25"

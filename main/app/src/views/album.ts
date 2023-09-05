@@ -27,12 +27,12 @@ export default `
 						<img src="/images/more.svg" />
 					</button>
 				</div>
-				<div class="play-button--green ml-auto">
+				<button class="play-button--green ml-auto">
 					<img style="position: relative; left: 2px" src="/images/play.svg" />
 					<div class="play-button__shuffle">
 						<img src="/images/shuffle.svg" />
 					</div>
-				</div>
+				</button>
 			</section>
 			<main class="mt-6">
 				

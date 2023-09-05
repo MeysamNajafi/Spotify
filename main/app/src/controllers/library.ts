@@ -74,7 +74,7 @@ class Library extends App {
 		});
 	}
 	renderArtists(givenData: Array<Playlist> | undefined = undefined) {
-		const data = givenData || playlistsData;
+		const data = givenData || artistsData;
 		this.main.innerHTML = "";
 		this.main.innerHTML = data
 			.map(
