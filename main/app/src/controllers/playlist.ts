@@ -6,7 +6,7 @@ import { Playlist as PlaylistType, Song } from "../interfaces";
 
 class Playlist extends App {
 	playlistId: number;
-	playlist: PlaylistType;
+	playlist!: PlaylistType;
 	shuffleBtn: HTMLButtonElement;
 	constructor() {
 		super();

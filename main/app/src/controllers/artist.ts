@@ -6,7 +6,7 @@ import { Artist, Song } from "../interfaces";
 
 class Home extends App {
 	artistId: number;
-	artistSongsId: Array<number>;
+	artistSongsId: Array<number> = [];
 	shuffleBtn: HTMLButtonElement;
 	constructor() {
 		super();

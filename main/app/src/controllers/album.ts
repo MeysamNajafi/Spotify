@@ -9,7 +9,7 @@ import { getAverageRGB } from "../utils/index.ts";
 class Album extends App {
 	albumId: number;
 	shuffleBtn: HTMLButtonElement;
-	album: AlbumType;
+	album!: AlbumType;
 	constructor() {
 		super();
 
