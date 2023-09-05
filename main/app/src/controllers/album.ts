@@ -5,6 +5,7 @@ import artistsData from "../database/artsits.json";
 import AlbumPage from "../views/album.ts";
 import { Artist, Album as AlbumType, Song } from "../interfaces";
 import { getAverageRGB } from "../utils/index.ts";
+import { getFile } from "../models/index.ts";
 
 class Album extends App {
 	albumId: number;
@@ -61,13 +62,23 @@ class Album extends App {
 		const rgb = getAverageRGB(albumImageEl);
 		albumColorEl.style.background = `radial-gradient(rgb(${rgb.r}, ${rgb.g}, ${rgb.b}), #121212)`;
 
-		for (const song of songs) {
+		for await (const song of songs) {
+			// check if file was downloaded or no
+			const savedbuffer = await getFile(song.id);
+			let isDownloaded: boolean;
+			if (typeof savedbuffer === "number") isDownloaded = false;
+			else isDownloaded = true;
+
 			musicsEl.innerHTML += `
                         <div class="album-music" data-id="${song.id}">
                             <div>
                                 <p class="album-music__title">${song.name}</p>
                                 <div class="album-music__artist">
-                                    <img src="/images/download.svg" width="20" />
+                                    ${
+										isDownloaded
+											? `<img src="/images/downloaded.svg" width="20" />`
+											: `<img src="/images/download.svg" width="20" />`
+									}
                                     <p>${artist.name}</p>
                                 </div>
                             </div>

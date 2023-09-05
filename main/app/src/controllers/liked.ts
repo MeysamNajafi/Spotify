@@ -6,6 +6,7 @@ import songsData from "../database/songs.json";
 import SearchPage from "../views/search.ts";
 import { Artist, Playlist, Song, Album } from "../interfaces";
 import LikedPage from "../views/liked.ts";
+import { getFile } from "../models/index.ts";
 
 class Liked extends App {
 	container: HTMLDivElement;
@@ -34,7 +35,15 @@ class Liked extends App {
 		this.liked = liked;
 
 		for await (const song of likedSongs) {
+			// check if file was downloaded or no
+			const savedbuffer = await getFile(song.id);
+			let isDownloaded: boolean;
+			if (typeof savedbuffer === "number") isDownloaded = false;
+			else isDownloaded = true;
+
+			// get music cover
 			const base64 = await this.getSongCover(song.music);
+
 			this.container.innerHTML += ` 
                     <div class="music" data-id="${song.id}">
 						<div class="music__info">
@@ -42,7 +51,11 @@ class Liked extends App {
 							<div class="music__title">
 								<h6>${song.name}</h6>
 								<div class="music__plays">
-									<img style="position:relative;top:1px" src="/images/downloaded.svg" alt="" />
+									${
+										isDownloaded
+											? `<img style="position:relative;top:1px" src="/images/downloaded.svg" alt="" />`
+											: `<img style="position:relative;top:1px" src="/images/download.svg" alt="" />`
+									}
 									<p>${song.plays.toLocaleString()}</p>
 								</div>
 							</div>
@@ -68,16 +81,25 @@ class Liked extends App {
             `;
 		}
 
-		// unlike functionality
-		document.querySelectorAll(".music").forEach((songEl) =>
-			songEl.addEventListener("click", (e) => {
-				const divEl = (e.target as HTMLElement).closest(".music") as HTMLDivElement;
-				const id = divEl.dataset!.id;
-				if (typeof id === "undefined") return;
+		// attach event listener to container to increase performance
+		this.container.addEventListener("click", (event) => {
+			const eventEl = event.target as HTMLElement;
+			const musicContainer: HTMLDivElement | null = (<HTMLElement>event.target).closest(
+				".music"
+			);
+			if (!musicContainer) return;
+			const id = musicContainer.dataset.id;
+			if (typeof id === "undefined") return;
+
+			// unlike functionality
+			if (eventEl.nodeName === "path") {
 				this.unlike(+id);
-				divEl.remove();
-			})
-		);
+				musicContainer.remove();
+			} else {
+				// go to music player
+				this.changePath("/song/" + id);
+			}
+		});
 
 		// back functionality
 		this.backButton.addEventListener("click", this.navigateBack.bind(null));
